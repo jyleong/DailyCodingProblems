@@ -96,6 +96,10 @@ class Daily_Coding_Problem_Test(unittest.TestCase):
     def test_case_9(self):
         input = "-"
         self.assertFalse(repr_number(input))
+
+    def test_case_10(self):
+        input = "2e5.3"
+        self.assertTrue(repr_number(input))
         
 
 if __name__ == "__main__":
