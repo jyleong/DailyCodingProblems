@@ -32,7 +32,7 @@ def getCourseOrder(courseList):
     for k, v in courseList.items():
         if k not in visited:
             try:
-                visiting, visitied, result = build_course_list(k, courseList, visiting, visited, result)
+                visiting, visited, result = build_course_list(k, courseList, visiting, visited, result)
             except Exception as e:
                 print(e)
                 return None
@@ -80,3 +80,95 @@ class Daily_Coding_Problem_Test(unittest.TestCase):
 if __name__ == '__main__':
 
     unittest.main()
+
+
+'''
+Bool version
+
+# 
+# Your previous Plain Text content is preserved below:
+# 
+# There are a total of n courses you have to take, labeled from 0 to n-1.
+# Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+# Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+#  
+# Examples
+# Example 1:
+# Bool is_possible(number_of_courses, prerequisite_pairs):
+# Input: 4, [[1,0], [1,2], [1,3]] 
+# Output: true
+# Explanation: There are a total of 2 courses to take. 
+#              To take course 1 you should have finished course 0. So it is possible.
+# Example 2:
+# Input: 2, [[1,0],[0,1]]
+# Output: false
+# Explanation: There are a total of 2 courses to take. 
+#              To take course 1 you should have finished course 0, and to take course 0 you should
+#              also have finished course 1. So it is impossible.
+# 
+# 
+# 1:
+# 
+# [1]
+# 
+# recur(0)
+# 
+# 0
+# 
+# visitingSet = Set()
+# completedSet = Set()
+# 
+# prepprocess inputs
+# dict()
+# key: course number, val : list of courses
+# 
+def is_possible(courses, prereqs):
+    if (not courses or not prereqs):
+        return True
+
+    visitingSet = set()
+    completedSet = set()
+  
+  # lookup table
+    prereq_dict = dict()
+    for pair in prereqs:
+        if pair[0] not in prereq_dict:
+            prereq_dict[pair[0]] = [pair[1]]
+        else:
+            prereq_dict[pair[0]].append(pair[1])
+  # instantaited dict
+  
+    # {1: [0]}
+    # {0: [1]}
+    for k, v in prereq_dict.items():
+        if k not in completedSet:
+      # go over each item in its values and do recursion
+      
+            valid_course_list = course_helper(k, prereq_dict, visitingSet, completedSet)
+      
+  # if visitedSet is empty and completed set is full then we can have a valid course list
+    return valid_course_list and not visitingSet
+    
+def course_helper(course, prereq_dict, visitingSet, completedSet):
+  
+    if (course in visitingSet):
+        return False
+    is_valid = True
+    if (course not in completedSet):
+        visitingSet.add(course)
+        for val in prereq_dict[course]:
+            if val in prereq_dict:
+                is_valid = course_helper(val, prereq_dict, visitingSet, completedSet)
+
+        visitingSet.remove(course)
+        completedSet.add(course)
+    return is_valid
+    
+if __name__ == '__main__':
+    assert is_possible(0, []) == True
+    assert is_possible(2, [[1,0]]) == True
+    assert is_possible(2, [[1,0], [0, 1]]) == False
+    assert is_possible(4, [[1,0], [1,2], [1,3]] ) == True
+    assert is_possible(3, [[1, 0], [1, 2], [0, 2]]) == True
+
+'''
