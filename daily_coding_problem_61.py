@@ -10,7 +10,7 @@ For example, pow(2, 10) should return 1024.
 import math
 
 def pow(x,y):
-    if y == 0:
+    if y == 0:n
         return 1
     newY = math.floor(y/2)
     val = pow(x,newY)
