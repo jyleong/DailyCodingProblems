@@ -34,7 +34,7 @@ class DailyCodingProblemTest(unittest.TestCase):
         k = 3
         result = [3, 2, 1, 5, 4]
         self.assertEqual(rotate_k(test, k), result)
-    
+
     def test_case_3(self):
 
         test = [5, 4, 3, 2, 1]
@@ -42,6 +42,12 @@ class DailyCodingProblemTest(unittest.TestCase):
         result = [5, 4, 3, 2, 1]
         self.assertEqual(rotate_k(test, k), result)
 
+    def test_case_4(self):
+
+        test = [5, 4, 3, 7, 2, 1]
+        k = 2
+        result = [2, 1, 5, 4, 3, 7]
+        self.assertEqual(rotate_k(test, k), result)
 
 if __name__ == '__main__':
 
